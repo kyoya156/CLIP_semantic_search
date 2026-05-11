@@ -13,7 +13,7 @@ from sentence_transformers import SentenceTransformer
 from PIL import Image
 from tqdm import tqdm
 
-# ── Config ──────────────────────────────────────────────────────────────────
+# Config
 CHROMA_PATH = "./chroma_db"
 COLLECTION_NAME = "image_search"
 MODEL_NAME = "clip-ViT-B-32"
@@ -43,7 +43,7 @@ def index_images(
 ) -> None:
     model = load_model()
 
-    # ── ChromaDB setup ───────────────────────────────────────────────────────
+    # ChromaDB setup
     client = chromadb.PersistentClient(path=CHROMA_PATH)
 
     if reset:
@@ -55,7 +55,7 @@ def index_images(
         metadata={"hnsw:space": "cosine"},   # cosine similarity
     )
 
-    # ── Skip already-indexed images ──────────────────────────────────────────
+    # Skip already-indexed images
     existing_ids: set[str] = set(collection.get(include=[])["ids"])
     img_paths = get_image_paths(img_folder)
     to_index = [p for p in img_paths if os.path.abspath(p) not in existing_ids]
@@ -66,7 +66,7 @@ def index_images(
 
     print(f"[2/3] Indexing {len(to_index)} image(s) (skipping {len(img_paths) - len(to_index)} already indexed)…")
 
-    # ── Batch encode & upsert ────────────────────────────────────────────────
+    # Batch encode & upsert
     for i in tqdm(range(0, len(to_index), batch_size), desc="Batches"):
         batch_paths = to_index[i : i + batch_size]
         images = [Image.open(p).convert("RGB") for p in batch_paths]

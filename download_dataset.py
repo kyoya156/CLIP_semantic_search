@@ -3,7 +3,7 @@ download_dataset.py — Download a sample image dataset for testing.
 
 Usage:
     python download_dataset.py --dataset cifar100 --count 1000 #max 60000
-    python download_dataset.py --dataset food101 --count 10000 #max 101000
+    python download_dataset.py --dataset food101 --count 75750 #max 75750
     python download_dataset.py --dataset oxford_pets --count 1000 #max 7,390
 """
 
@@ -85,7 +85,7 @@ def download_images(dataset_key: str, count: int, out_dir: str) -> None:
 
         saved += 1
 
-    print(f"\n✅ Saved {saved} images to '{out_dir}'")
+    print(f"\nSaved {saved} images to '{out_dir}'")
 
 
 if __name__ == "__main__":

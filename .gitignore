@@ -4,3 +4,5 @@
 
 # images folder
 images/
+# chomaDB database folder
+chroma_db/

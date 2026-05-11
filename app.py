@@ -12,14 +12,14 @@ import streamlit as st
 from sentence_transformers import SentenceTransformer
 from PIL import Image
 
-# ── Config ──────────────────────────────────────────────────────────────────
+# Config
 CHROMA_PATH = "./chroma_db"
 COLLECTION_NAME = "image_search"
 MODEL_NAME = "clip-ViT-B-32"
 TOP_K_MAX = 12
 
 
-# ── Cached resources ─────────────────────────────────────────────────────────
+# Cached resources
 @st.cache_resource
 def load_model() -> SentenceTransformer:
     return SentenceTransformer(MODEL_NAME)
@@ -31,7 +31,7 @@ def get_collection():
     return client.get_collection(name=COLLECTION_NAME)
 
 
-# ── Search helpers ────────────────────────────────────────────────────────────
+# Search helpers
 def search_by_text(query: str, top_k: int, collection, model: SentenceTransformer):
     embedding = model.encode(query, convert_to_tensor=False).tolist()
     return collection.query(query_embeddings=[embedding], n_results=top_k)
@@ -77,22 +77,22 @@ def render_results(results: dict) -> None:
             )
 
 
-# ── Page setup ────────────────────────────────────────────────────────────────
+# Page setup
 st.set_page_config(
     page_title="Semantic Image Search",
-    page_icon="🔎",
+    page_icon="",
     layout="wide",
 )
-st.title("🔎 Semantic Image Search")
+st.title("Semantic Image Search")
 st.caption("Powered by CLIP + ChromaDB")
 
-# ── Load resources ────────────────────────────────────────────────────────────
+# Load resources
 model = load_model()
 
 try:
     collection = get_collection()
     n_indexed = collection.count()
-    st.sidebar.success(f"✅ {n_indexed} image(s) indexed")
+    st.sidebar.success(f" {n_indexed} image(s) indexed")
 except Exception:
     st.error(
         "**ChromaDB collection not found.**\n\n"
@@ -100,17 +100,17 @@ except Exception:
     )
     st.stop()
 
-# ── Sidebar controls ──────────────────────────────────────────────────────────
+# Sidebar controls
 st.sidebar.header("Search settings")
 top_k = st.sidebar.slider("Results to show", min_value=1, max_value=TOP_K_MAX, value=6)
 
-# ── Search tabs ───────────────────────────────────────────────────────────────
-tab_text, tab_image = st.tabs(["🔤 Text search", "🖼️ Image search"])
+# Search tabs
+tab_text, tab_image = st.tabs(["Text search", "Image search"])
 
 with tab_text:
     query = st.text_input(
         "Describe what you're looking for (in English):",
-        placeholder="e.g. a cat sitting on a sofa",
+        placeholder="e.g. A slice of pepperoni pizza on a wooden table",
     )
     if st.button("Search", key="text_search") and query.strip():
         with st.spinner("Searching…"):
