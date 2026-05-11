@@ -105,19 +105,27 @@ st.sidebar.header("Search settings")
 top_k = st.sidebar.slider("Results to show", min_value=1, max_value=TOP_K_MAX, value=6)
 
 # Search tabs
-tab_text, tab_image = st.tabs(["Text search", "Image search"])
-
+tab_text, tab_image = st.tabs(["🔤 Text search", "🖼️ Image search"])
+ 
 with tab_text:
+    def _on_enter():
+        st.session_state["do_search"] = True
+ 
     query = st.text_input(
         "Describe what you're looking for (in English):",
-        placeholder="e.g. A slice of pepperoni pizza on a wooden table",
+        placeholder="e.g. a cat sitting on a sofa",
+        key="text_query",
+        on_change=_on_enter,
     )
-    if st.button("Search", key="text_search") and query.strip():
+    clicked = st.button("Search", key="text_search")
+ 
+    if (clicked or st.session_state.get("do_search")) and query.strip():
+        st.session_state["do_search"] = False
         with st.spinner("Searching…"):
             results = search_by_text(query.strip(), top_k, collection, model)
         st.subheader(f"Top {top_k} results for: *{query}*")
         render_results(results)
-
+ 
 with tab_image:
     uploaded = st.file_uploader(
         "Upload a query image:",
