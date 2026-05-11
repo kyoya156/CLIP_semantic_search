@@ -61,7 +61,7 @@ def index_images(
     to_index = [p for p in img_paths if os.path.abspath(p) not in existing_ids]
 
     if not to_index:
-        print("[2/3] All images already indexed. Nothing to do.")
+        print("[2/3] All images already indexed. Bruh why bother running this?")# im bored waiting for embedding so i added this message
         return
 
     print(f"[2/3] Indexing {len(to_index)} image(s) (skipping {len(img_paths) - len(to_index)} already indexed)…")
