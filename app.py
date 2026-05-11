@@ -65,7 +65,7 @@ def render_results(results: dict) -> None:
 
         with col:
             try:
-                st.image(Image.open(path), use_container_width=True)
+                st.image(Image.open(path), width='stretch')
             except Exception:
                 st.error(f"Cannot load:\n{filename}")
             st.markdown(
