@@ -113,7 +113,7 @@ with tab_text:
  
     query = st.text_input(
         "Describe what you're looking for (in English):",
-        placeholder="e.g. a cat sitting on a sofa",
+        placeholder="e.g. Sunny side up egg on toast",
         key="text_query",
         on_change=_on_enter,
     )
