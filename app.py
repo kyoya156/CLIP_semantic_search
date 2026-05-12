@@ -105,7 +105,7 @@ st.sidebar.header("Search settings")
 top_k = st.sidebar.slider("Results to show", min_value=1, max_value=TOP_K_MAX, value=6)
 
 # Search tabs
-tab_text, tab_image = st.tabs(["🔤 Text search", "🖼️ Image search"])
+tab_text, tab_image = st.tabs(["Text search", "Image search"])
  
 with tab_text:
     def _on_enter():
