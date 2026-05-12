@@ -6,3 +6,8 @@
 images/
 # chomaDB database folder
 chroma_db/
+
+*.jpg
+*.png
+*.webp
+*.bmp
