@@ -2,9 +2,9 @@
 download_dataset.py — Download a sample image dataset for testing.
 
 Usage:
-    python download_dataset.py --dataset cifar100 --count 1000 #max 60000
+    python download_dataset.py --dataset cifar100 --count 10000 #max 60000
     python download_dataset.py --dataset food101 --count 75750 #max 75750
-    python download_dataset.py --dataset oxford_pets --count 1000 #max 7,390
+    python download_dataset.py --dataset oxford_pets --count 1000 #max 7390
 """
 
 import os

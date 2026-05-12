@@ -1,9 +1,10 @@
 """
 db.py — Index images into ChromaDB using CLIP embeddings.
-Run this once (or whenever you add new images) before launching app.py.
+Run this once (or whenever we add new images) before launching app.py.
 
 Usage:
-    python db.py --images ./images --reset
+    python db.py --images ./images
+    python db.py --images ./images --reset # drop and rebuild the collection
 """
 
 import os
