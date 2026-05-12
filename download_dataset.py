@@ -19,7 +19,7 @@ DATASETS = {
         "image_key": "img",
         "label_key": "fine_label",
         "label_names": None,  # loaded from dataset info
-        "description": "100 object classes, clean photos",
+        "description": "100 object classes, clean photos but bad resolution (32x32)",
     },
     "food101": {
         "hf_name": "food101",
